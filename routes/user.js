@@ -9,7 +9,7 @@ const {
   validateEmail,
   validatePassword,
 } = require("../utils/validators");
-const { JsonWebTokenError } = require("jsonwebtoken");
+// const { JsonWebTokenError } = require("jsonwebtoken");
 
 router.post("/signup", async (req, res) => {
   try {
@@ -86,6 +86,15 @@ router.post("/signin", async (req, res) => {
   } catch (e) {
     console.log(">>>>", e);
     return res.status(500).send(e);
+  }
+});
+
+router.get("/signout", (req, res) => {
+  try {
+    res.clearCookie("t");
+    return res.status(200).json({ message: "cookie deleted" });
+  } catch (e) {
+    res.status(500).send(e);
   }
 });
 
